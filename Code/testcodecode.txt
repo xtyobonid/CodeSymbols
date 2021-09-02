@@ -1,0 +1,91 @@
+KeyListener 
+graphics2d
+canvas
+
+ArrayList<ArrayList<String>> groups = new ArrayList<ArrayList<String>>();
+string input;
+
+
+keyPressed() {
+	get char letter;
+	letter = letter.toLowercase();
+	if (isValidInputCharacter(letter)) {
+		if (isBackspace(letter) {
+			input = input.substring(0, input.length() - 1); //get rid of last char
+		} else {
+			input += letter;
+		}
+		updateGrouping();
+	}
+}
+
+//input: "rocket league"
+//array   rocket | league
+//al	  ro | ck | et  ||  le | ag | ue 
+//al	  ro | c | k | et  ||  le | agu | e
+//al 	  ro | c | k | et  ||  le | ague
+updateGrouping() {
+	groups = new ArrayList<ArrayList<String>>();
+	String[] temp = input.split(" ");
+	for (int i = 0; i < temp.length; i++) { // loop for each word
+		groups.add(new ArrayList<String>();
+		for (int j = 0; j < temp[i].length(); j++) { //loop for each char in word temp[i]
+			if (j % 2 == 0) {
+				groups.get(i).add(new String("")); //once size gets to 2, new string in array
+			}
+			groups.get(i).set(groups.get(i).size() - 1, groups.get(i).get(groups.get(i).size() - 1) + temp[i].substring(j, j + 1)); //update last string to include char at temp[i].charAt(j);
+		}
+	}
+	//groups now has each word split into groups of length 2
+	fixGroupings();
+}
+
+//al	  ro | ck | et  ||  le | ag | ue 
+//al	  ro | c | k | et  ||  le | agu | e
+//al 	  ro | c | k | et  ||  le | ague
+fixGroupings() {
+	if (!checkGroupValidity) {
+		
+	}
+}
+
+//al	  ro | ck | et  ||  le | ag | ue 
+//al	  ro | c | k | et  ||  le | agu | e
+//al 	  ro | c | k | et  ||  le | ague
+boolean checkGroupValidity() {
+	for (int i = 0; i < groups.size(); i++) {
+		for (int j = 0; i < groups.get(i).size(); j++) {
+			String temp = groups.get(i).get(j);
+			if (temp.length() > 5) {
+				return false;
+			}
+
+			int consonantCount = 0;
+			int consonantIndex = -1;
+			for (int k = 0; k < temp.length(); k++) {
+				if (isConsonant(temp.charAt(k))) {
+					consonantCount++;
+					consonantIndex = k;
+				}
+			}
+
+			if (consonantCount > 1) {
+				return false;
+			}
+
+			if (consonantIndex > 2 || temp.length() - consonantIndex - 1 > 2) {
+				return false
+			}
+			
+			return true;
+		}
+	}
+	return true;
+}
+
+boolean isValidInputCharacter(char c) {
+	if (is "a-z" or " " or backspace)
+		return true;
+	else
+		return false;
+}
